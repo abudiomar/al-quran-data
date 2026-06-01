@@ -1,0 +1,3 @@
+# Book JSONs are published as release assets, not tracked in git.
+*.json
+!manifest.json

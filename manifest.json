@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "repo": "abudiomar/al-quran-data",
+  "release_tag": "v1.0",
+  "books": [
+    {
+      "id": "muyassar",
+      "type": "tafsir",
+      "language": "ar",
+      "name_ar": "التفسير الميسر",
+      "name_en": "Al-Tafsir Al-Muyassar",
+      "asset": "muyassar.json",
+      "ayah_count": 6236
+    },
+    {
+      "id": "saadi",
+      "type": "tafsir",
+      "language": "ar",
+      "name_ar": "تيسير الكريم الرحمن (السعدي)",
+      "name_en": "Tafsir As-Saadi",
+      "asset": "saadi.json",
+      "ayah_count": 6177
+    },
+    {
+      "id": "ibn_kathir",
+      "type": "tafsir",
+      "language": "ar",
+      "name_ar": "تفسير ابن كثير",
+      "name_en": "Tafsir Ibn Kathir",
+      "asset": "ibn_kathir.json",
+      "ayah_count": 6236
+    },
+    {
+      "id": "tabari",
+      "type": "tafsir",
+      "language": "ar",
+      "name_ar": "تفسير الطبري",
+      "name_en": "Tafsir Al-Tabari",
+      "asset": "tabari.json",
+      "ayah_count": 6236
+    },
+    {
+      "id": "baghawi",
+      "type": "tafsir",
+      "language": "ar",
+      "name_ar": "تفسير البغوي",
+      "name_en": "Tafsir Al-Baghawi",
+      "asset": "baghawi.json",
+      "ayah_count": 6236
+    },
+    {
+      "id": "mukhtasar_ar",
+      "type": "tafsir",
+      "language": "ar",
+      "name_ar": "المختصر في تفسير القرآن الكريم",
+      "name_en": "Al-Mukhtasar fi Tafsir al-Quran",
+      "asset": "mukhtasar_ar.json",
+      "ayah_count": 6236
+    },
+    {
+      "id": "mukhtasar_en",
+      "type": "tafsir",
+      "language": "en",
+      "name_ar": "المختصر في تفسير القرآن (إنجليزي)",
+      "name_en": "Al-Mukhtasar (Abridged Explanation)",
+      "asset": "mukhtasar_en.json",
+      "ayah_count": 6236
+    },
+    {
+      "id": "saheeh_intl",
+      "type": "translation",
+      "language": "en",
+      "name_ar": "صحيح إنترناشونال",
+      "name_en": "Saheeh International",
+      "asset": "saheeh_intl.json",
+      "ayah_count": 6236
+    }
+  ]
+}
