@@ -5,73 +5,89 @@
   "books": [
     {
       "id": "muyassar",
+      "id_num": 900001,
       "type": "tafsir",
-      "language": "ar",
+      "language": "arabic",
       "name_ar": "التفسير الميسر",
       "name_en": "Al-Tafsir Al-Muyassar",
+      "author": "مجمع الملك فهد",
       "asset": "muyassar.json",
       "ayah_count": 6236
     },
     {
       "id": "saadi",
+      "id_num": 900002,
       "type": "tafsir",
-      "language": "ar",
+      "language": "arabic",
       "name_ar": "تيسير الكريم الرحمن (السعدي)",
       "name_en": "Tafsir As-Saadi",
+      "author": "عبد الرحمن السعدي",
       "asset": "saadi.json",
       "ayah_count": 6177
     },
     {
       "id": "ibn_kathir",
+      "id_num": 900003,
       "type": "tafsir",
-      "language": "ar",
+      "language": "arabic",
       "name_ar": "تفسير ابن كثير",
       "name_en": "Tafsir Ibn Kathir",
+      "author": "ابن كثير",
       "asset": "ibn_kathir.json",
       "ayah_count": 6236
     },
     {
       "id": "tabari",
+      "id_num": 900004,
       "type": "tafsir",
-      "language": "ar",
+      "language": "arabic",
       "name_ar": "تفسير الطبري",
       "name_en": "Tafsir Al-Tabari",
+      "author": "ابن جرير الطبري",
       "asset": "tabari.json",
       "ayah_count": 6236
     },
     {
       "id": "baghawi",
+      "id_num": 900005,
       "type": "tafsir",
-      "language": "ar",
+      "language": "arabic",
       "name_ar": "تفسير البغوي",
       "name_en": "Tafsir Al-Baghawi",
+      "author": "البغوي",
       "asset": "baghawi.json",
       "ayah_count": 6236
     },
     {
       "id": "mukhtasar_ar",
+      "id_num": 900006,
       "type": "tafsir",
-      "language": "ar",
+      "language": "arabic",
       "name_ar": "المختصر في تفسير القرآن الكريم",
       "name_en": "Al-Mukhtasar fi Tafsir al-Quran",
+      "author": "مركز تفسير",
       "asset": "mukhtasar_ar.json",
       "ayah_count": 6236
     },
     {
       "id": "mukhtasar_en",
+      "id_num": 900007,
       "type": "tafsir",
-      "language": "en",
+      "language": "english",
       "name_ar": "المختصر في تفسير القرآن (إنجليزي)",
       "name_en": "Al-Mukhtasar (Abridged Explanation)",
+      "author": "Tafsir Center",
       "asset": "mukhtasar_en.json",
       "ayah_count": 6236
     },
     {
       "id": "saheeh_intl",
+      "id_num": 900008,
       "type": "translation",
-      "language": "en",
+      "language": "english",
       "name_ar": "صحيح إنترناشونال",
       "name_en": "Saheeh International",
+      "author": "Saheeh International",
       "asset": "saheeh_intl.json",
       "ayah_count": 6236
     }
