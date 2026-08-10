@@ -1,7 +1,7 @@
 {
-  "version": 1,
+  "version": 2,
   "repo": "abudiomar/al-quran-data",
-  "release_tag": "v1.0",
+  "release_tag": "v1.1",
   "books": [
     {
       "id": "muyassar",
@@ -34,7 +34,8 @@
       "name_en": "Tafsir Ibn Kathir",
       "author": "ابن كثير",
       "asset": "ibn_kathir.json",
-      "ayah_count": 6236
+      "ayah_count": 6236,
+      "content_format": "qul_html_v1"
     },
     {
       "id": "tabari",
@@ -45,7 +46,8 @@
       "name_en": "Tafsir Al-Tabari",
       "author": "ابن جرير الطبري",
       "asset": "tabari.json",
-      "ayah_count": 6236
+      "ayah_count": 6236,
+      "content_format": "qul_html_v1"
     },
     {
       "id": "baghawi",
@@ -56,7 +58,8 @@
       "name_en": "Tafsir Al-Baghawi",
       "author": "البغوي",
       "asset": "baghawi.json",
-      "ayah_count": 6236
+      "ayah_count": 6236,
+      "content_format": "qul_html_v1"
     },
     {
       "id": "mukhtasar_ar",
