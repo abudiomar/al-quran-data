@@ -31,6 +31,7 @@ Regenerate the structured long-tafsir assets with:
 pwsh ./tools/fetch_qul_tafsirs.ps1 -OutputDirectory ./dist
 python -m tools.structure_tafsir ./dist/ibn_kathir.json ./dist/ibn_kathir.structured.json
 python -m tools.structure_tafsir ./dist/baghawi.json ./dist/baghawi.structured.json
+python -m tools.structure_tafsir ./dist/tabari.json ./dist/tabari.structured.json
 ```
 
 Structured anchors retain `source_html` and add `plain_text`, semantic `blocks`,

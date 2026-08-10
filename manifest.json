@@ -38,7 +38,7 @@
       "content_format": "qul_html_v1",
       "structured_asset": "ibn_kathir.structured.json",
       "structured_format": "tafsir_blocks_v1",
-      "structured_sha256": "fadf172fb4bbd004dcebc8bee272b272c4cd4cfd17954d353ffd0510a597c5b"
+      "structured_sha256": "fadf172fb4bbd004dcebcd8bee272b272c4cd4cfd17954d353ffd0510a597c5b"
     },
     {
       "id": "tabari",
@@ -50,7 +50,10 @@
       "author": "ابن جرير الطبري",
       "asset": "tabari.json",
       "ayah_count": 6236,
-      "content_format": "qul_html_v1"
+      "content_format": "qul_html_v1",
+      "structured_asset": "tabari.structured.json",
+      "structured_format": "tafsir_blocks_v1",
+      "structured_sha256": "8f37bbc51c44d5093eacadacbfc422a812465de4524c137820f172d70d94fdbb"
     },
     {
       "id": "baghawi",
