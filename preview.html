@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>معاينة تفسير ابن كثير</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f4f1;
+      --surface: #fff;
+      --text: #171916;
+      --muted: #6b7069;
+      --line: #dcdfd8;
+      --accent: #176b4a;
+      --quote: #9a3535;
+      --radius: 12px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #151714;
+        --surface: #1e211d;
+        --text: #eff1ec;
+        --muted: #aeb4aa;
+        --line: #343934;
+        --accent: #72c69e;
+        --quote: #ef9a9a;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Naskh Arabic", "Geeza Pro", Tahoma, serif;
+    }
+    button, input { font: inherit; }
+    .toolbar {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 2;
+      border-block-end: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 94%, transparent);
+      backdrop-filter: blur(12px);
+    }
+    .toolbar-inner {
+      max-width: 920px;
+      margin: auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    h1 { margin: 0; font-size: 1.05rem; white-space: nowrap; }
+    .lookup { flex: 1; display: flex; gap: 8px; }
+    input {
+      min-width: 0;
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      direction: ltr;
+      text-align: center;
+    }
+    button, .file-label {
+      min-height: 42px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+    }
+    button:hover, .file-label:hover { border-color: var(--accent); }
+    button:focus-visible, input:focus-visible, .file-label:focus-within {
+      outline: 3px solid color-mix(in srgb, var(--accent) 35%, transparent);
+      outline-offset: 2px;
+    }
+    #file { position: absolute; inline-size: 1px; block-size: 1px; opacity: 0; }
+    main { max-width: 760px; margin: auto; padding: 38px 24px 80px; }
+    .status { color: var(--muted); text-align: center; padding: 48px 12px; }
+    progress { width: min(360px, 100%); height: 6px; accent-color: var(--accent); }
+    .meta {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-block-end: 24px;
+      color: var(--muted);
+    }
+    .meta strong { color: var(--accent); font-size: 1.12rem; }
+    article { font-size: clamp(1.18rem, 1rem + .55vw, 1.48rem); line-height: 2.05; }
+    .paragraph, .heading { margin: 0; padding-block: 18px; }
+    .paragraph + .paragraph, .heading + .paragraph { border-block-start: 1px solid var(--line); }
+    .heading { font-size: 1.16em; font-weight: 700; }
+    .quran { color: var(--quote); font-weight: 600; }
+    .ayah-reference { color: var(--muted); font-size: .82em; white-space: nowrap; }
+    .separator { border: 0; border-block-start: 1px solid var(--line); margin: 18px 0; }
+    .footnote-ref {
+      display: inline-grid;
+      place-items: center;
+      min-width: 1.6em;
+      min-height: 1.6em;
+      margin-inline: .12em;
+      padding: 0 .32em;
+      border: 0;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 13%, transparent);
+      color: var(--accent);
+      font: 700 .66em/1 system-ui, sans-serif;
+      vertical-align: super;
+    }
+    dialog {
+      width: min(560px, calc(100% - 28px));
+      max-height: min(70vh, 620px);
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 8px 24px rgb(0 0 0 / .18);
+    }
+    dialog::backdrop { background: rgb(0 0 0 / .48); }
+    .dialog-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-block-end: 1px solid var(--line); }
+    .dialog-head strong { color: var(--accent); }
+    .dialog-head button { min-width: 42px; padding: 4px 10px; }
+    #footnoteText { margin: 0; padding: 20px; font-size: 1.15rem; line-height: 1.9; white-space: pre-wrap; }
+    .error { color: #a32f2f; }
+    @media (max-width: 640px) {
+      .toolbar-inner { padding: 10px 12px; flex-wrap: wrap; }
+      h1 { width: 100%; text-align: center; }
+      .file-label { padding-inline: 11px; }
+      main { padding: 24px 18px 64px; }
+      article { line-height: 1.95; }
+      dialog { width: 100%; max-width: none; margin: auto 0 0; border-radius: 14px 14px 0 0; border-inline: 0; border-block-end: 0; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      dialog[open] { animation: appear 150ms ease-out; }
+      @keyframes appear { from { opacity: 0; transform: translateY(8px); } }
+    }
+  </style>
+</head>
+<body>
+  <header class="toolbar">
+    <div class="toolbar-inner">
+      <h1>تفسير ابن كثير</h1>
+      <form class="lookup" id="lookup">
+        <input id="ayahKey" value="1:1" inputmode="numeric" pattern="[0-9]+:[0-9]+" aria-label="رقم السورة والآية" placeholder="2:255">
+        <button type="submit">عرض</button>
+      </form>
+      <label class="file-label">فتح ملف<input id="file" type="file" accept="application/json,.json"></label>
+    </div>
+  </header>
+
+  <main>
+    <section class="status" id="status">
+      <p id="statusText">جارٍ تحميل بيانات التفسير…</p>
+      <progress id="progress"></progress>
+    </section>
+    <section id="reader" hidden>
+      <div class="meta"><strong id="location"></strong><span id="range"></span></div>
+      <article id="content"></article>
+    </section>
+  </main>
+
+  <dialog id="footnoteDialog">
+    <div class="dialog-head"><strong id="footnoteTitle"></strong><button id="closeDialog" aria-label="إغلاق">×</button></div>
+    <p id="footnoteText"></p>
+  </dialog>
+
+  <script>
+    const DATA_URL = "https://github.com/abudiomar/al-quran-data/releases/download/v1.1/ibn_kathir.structured.json";
+    let book;
+
+    const status = document.querySelector("#status");
+    const statusText = document.querySelector("#statusText");
+    const progress = document.querySelector("#progress");
+    const reader = document.querySelector("#reader");
+    const content = document.querySelector("#content");
+    const dialog = document.querySelector("#footnoteDialog");
+
+    function text(tag, value, className) {
+      const node = document.createElement(tag);
+      node.textContent = value;
+      if (className) node.className = className;
+      return node;
+    }
+
+    function showError(message) {
+      status.hidden = false;
+      reader.hidden = true;
+      progress.hidden = true;
+      statusText.className = "error";
+      statusText.textContent = message;
+    }
+
+    function footnoteButton(note, footnotes) {
+      const button = text("button", String(note.id), "footnote-ref");
+      button.type = "button";
+      button.ariaLabel = `الحاشية ${note.id}`;
+      button.addEventListener("click", () => {
+        const footnote = footnotes.find(item => item.id === note.id);
+        document.querySelector("#footnoteTitle").textContent = `الحاشية ${note.id}`;
+        document.querySelector("#footnoteText").textContent = footnote?.text || "الحاشية غير موجودة";
+        dialog.showModal();
+      });
+      return button;
+    }
+
+    function renderSpan(span, footnotes) {
+      if (span.type === "footnote_reference") return footnoteButton(span, footnotes);
+      const classes = { quran: "quran", ayah_reference: "ayah-reference", text: "" };
+      return text("span", span.text || "", classes[span.type] || "");
+    }
+
+    function render(key) {
+      if (!book) return;
+      let entry = book[key];
+      if (typeof entry === "string") entry = book[entry];
+      if (!entry) return showError(`لا يوجد تفسير للموضع ${key}`);
+
+      content.replaceChildren();
+      for (const block of entry.blocks || []) {
+        if (block.type === "separator") {
+          content.append(document.createElement("hr"));
+          content.lastElementChild.className = "separator";
+          continue;
+        }
+        const element = document.createElement(block.type === "heading" ? "h2" : "p");
+        element.className = block.type;
+        for (const span of block.spans || []) element.append(renderSpan(span, entry.footnotes || []));
+        content.append(element);
+      }
+
+      document.querySelector("#location").textContent = `الآية ${key}`;
+      document.querySelector("#range").textContent = entry.ayah_keys?.length > 1 ? `يشمل ${entry.ayah_keys.length} آيات` : "";
+      status.hidden = true;
+      reader.hidden = false;
+      document.title = `تفسير ابن كثير — ${key}`;
+    }
+
+    async function loadRemote() {
+      try {
+        const response = await fetch(DATA_URL);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const total = Number(response.headers.get("content-length")) || 0;
+        if (!response.body || !total) {
+          book = await response.json();
+        } else {
+          progress.max = total;
+          progress.value = 0;
+          const reader = response.body.getReader();
+          const chunks = [];
+          let received = 0;
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            chunks.push(value);
+            received += value.length;
+            progress.value = received;
+            statusText.textContent = `جارٍ التحميل… ${Math.round(received / total * 100)}٪`;
+          }
+          const bytes = new Uint8Array(received);
+          let offset = 0;
+          for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
+          statusText.textContent = "جارٍ تحليل الملف…";
+          book = JSON.parse(new TextDecoder().decode(bytes));
+        }
+        render(document.querySelector("#ayahKey").value.trim());
+      } catch (error) {
+        showError("تعذر تحميل الملف تلقائياً. استخدم زر «فتح ملف» لاختيار النسخة المحلية.");
+      }
+    }
+
+    document.querySelector("#lookup").addEventListener("submit", event => {
+      event.preventDefault();
+      render(document.querySelector("#ayahKey").value.trim());
+    });
+    document.querySelector("#file").addEventListener("change", async event => {
+      const file = event.target.files[0];
+      if (!file) return;
+      status.hidden = false;
+      statusText.className = "";
+      statusText.textContent = "جارٍ تحليل الملف…";
+      progress.hidden = true;
+      try {
+        book = JSON.parse(await file.text());
+        render(document.querySelector("#ayahKey").value.trim());
+      } catch (_) {
+        showError("ملف JSON غير صالح.");
+      }
+    });
+    document.querySelector("#closeDialog").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
+
+    loadRemote();
+  </script>
+</body>
+</html>
