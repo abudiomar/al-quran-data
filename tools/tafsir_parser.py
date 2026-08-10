@@ -144,6 +144,12 @@ def structure_book(source):
                 raise ValueError(f"{ayah_key}: broken reference to {entry}")
             structured[ayah_key] = entry
             continue
+        if isinstance(entry, dict) and entry.get("ref"):
+            reference = str(entry["ref"])
+            if reference not in source:
+                raise ValueError(f"{ayah_key}: broken reference to {reference}")
+            structured[ayah_key] = reference
+            continue
         if not isinstance(entry, dict) or not str(entry.get("text", "")).strip():
             raise ValueError(f"{ayah_key}: missing tafsir text")
 

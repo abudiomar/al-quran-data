@@ -12,7 +12,10 @@
       "name_en": "Al-Tafsir Al-Muyassar",
       "author": "مجمع الملك فهد",
       "asset": "muyassar.json",
-      "ayah_count": 6236
+      "ayah_count": 6236,
+      "structured_asset": "muyassar.structured.json",
+      "structured_format": "tafsir_blocks_v1",
+      "structured_sha256": "fd13f810f3d5562e0ebcb07a37d1897c7e1505e6bc8e978bb0b049656632bd9e"
     },
     {
       "id": "saadi",
@@ -23,7 +26,12 @@
       "name_en": "Tafsir As-Saadi",
       "author": "عبد الرحمن السعدي",
       "asset": "saadi.json",
-      "ayah_count": 6177
+      "ayah_count": 6177,
+      "coverage_status": "source_incomplete",
+      "missing_ayah_count": 59,
+      "structured_asset": "saadi.structured.json",
+      "structured_format": "tafsir_blocks_v1",
+      "structured_sha256": "de582e811e83d48f2331011e819e18ce51a26dffea2c4db95f48a3179454b710"
     },
     {
       "id": "ibn_kathir",
@@ -79,7 +87,10 @@
       "name_en": "Al-Mukhtasar fi Tafsir al-Quran",
       "author": "مركز تفسير",
       "asset": "mukhtasar_ar.json",
-      "ayah_count": 6236
+      "ayah_count": 6236,
+      "structured_asset": "mukhtasar_ar.structured.json",
+      "structured_format": "tafsir_blocks_v1",
+      "structured_sha256": "9260d744805d57ae05bc35a6c75c4b0a48f01bb55563f0c2f683e1afc92fe588"
     },
     {
       "id": "mukhtasar_en",
@@ -90,7 +101,10 @@
       "name_en": "Al-Mukhtasar (Abridged Explanation)",
       "author": "Tafsir Center",
       "asset": "mukhtasar_en.json",
-      "ayah_count": 6236
+      "ayah_count": 6236,
+      "structured_asset": "mukhtasar_en.structured.json",
+      "structured_format": "tafsir_blocks_v1",
+      "structured_sha256": "54d3b52f803700b1ef51cf865f03179bbc6ae3c571f9bc9e86ea9070c5dad084"
     },
     {
       "id": "saheeh_intl",

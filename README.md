@@ -32,8 +32,16 @@ pwsh ./tools/fetch_qul_tafsirs.ps1 -OutputDirectory ./dist
 python -m tools.structure_tafsir ./dist/ibn_kathir.json ./dist/ibn_kathir.structured.json
 python -m tools.structure_tafsir ./dist/baghawi.json ./dist/baghawi.structured.json
 python -m tools.structure_tafsir ./dist/tabari.json ./dist/tabari.structured.json
+python -m tools.structure_tafsir ./dist/muyassar.json ./dist/muyassar.structured.json
+python -m tools.structure_tafsir ./dist/saadi.json ./dist/saadi.structured.json
+python -m tools.structure_tafsir ./dist/mukhtasar_ar.json ./dist/mukhtasar_ar.structured.json
+python -m tools.structure_tafsir ./dist/mukhtasar_en.json ./dist/mukhtasar_en.structured.json
 ```
 
 Structured anchors retain `source_html` and add `plain_text`, semantic `blocks`,
 and extracted `footnotes`. Range members remain string references to their
 anchor, matching the raw asset.
+
+The current Al-Saadi source contains 6,177 of 6,236 ayahs. Its 59 absent
+ayahs remain explicitly unavailable; generation never guesses or copies
+neighboring commentary.

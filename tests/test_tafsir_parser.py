@@ -12,7 +12,15 @@ class TafsirParserTest(unittest.TestCase):
         )
         books = {book["id"]: book for book in manifest["books"]}
 
-        for book_id in ("ibn_kathir", "baghawi", "tabari"):
+        for book_id in (
+            "muyassar",
+            "saadi",
+            "ibn_kathir",
+            "tabari",
+            "baghawi",
+            "mukhtasar_ar",
+            "mukhtasar_en",
+        ):
             with self.subTest(book_id=book_id):
                 book = books[book_id]
                 self.assertEqual(
@@ -20,6 +28,9 @@ class TafsirParserTest(unittest.TestCase):
                 )
                 self.assertEqual(book["structured_format"], "tafsir_blocks_v1")
                 self.assertRegex(book["structured_sha256"], r"^[0-9a-f]{64}$")
+
+        self.assertEqual(books["saadi"]["ayah_count"], 6177)
+        self.assertEqual(books["saadi"]["coverage_status"], "source_incomplete")
 
     def test_parses_ibn_kathir_paragraph_semantics(self):
         source = (
@@ -118,6 +129,14 @@ class TafsirParserTest(unittest.TestCase):
         self.assertEqual(result["2:8"]["blocks"][0]["spans"][1], {
             "type": "quran", "text": "﴿آية﴾"
         })
+
+    def test_structures_object_reference_used_by_short_tafsirs(self):
+        result = structure_book({
+            "2:3": {"text": "تفسير الآيتين", "group": "2:3..2:4"},
+            "2:4": {"ref": "2:3"},
+        })
+
+        self.assertEqual(result["2:4"], "2:3")
 
     def test_preserves_standalone_footnote_between_blocks(self):
         result = parse_tafsir_html(
