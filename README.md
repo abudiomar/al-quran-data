@@ -29,4 +29,9 @@ Regenerate the structured long-tafsir assets with:
 
 ```powershell
 pwsh ./tools/fetch_qul_tafsirs.ps1 -OutputDirectory ./dist
+python -m tools.structure_tafsir ./dist/ibn_kathir.json ./dist/ibn_kathir.structured.json
 ```
+
+Structured anchors retain `source_html` and add `plain_text`, semantic `blocks`,
+and extracted `footnotes`. Range members remain string references to their
+anchor, matching the raw asset.

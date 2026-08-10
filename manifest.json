@@ -35,7 +35,10 @@
       "author": "ابن كثير",
       "asset": "ibn_kathir.json",
       "ayah_count": 6236,
-      "content_format": "qul_html_v1"
+      "content_format": "qul_html_v1",
+      "structured_asset": "ibn_kathir.structured.json",
+      "structured_format": "tafsir_blocks_v1",
+      "structured_sha256": "fadf172fb4bbd004dcebc8bee272b272c4cd4cfd17954d353ffd0510a597c5b"
     },
     {
       "id": "tabari",
