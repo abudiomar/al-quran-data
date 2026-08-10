@@ -62,7 +62,10 @@
       "author": "البغوي",
       "asset": "baghawi.json",
       "ayah_count": 6236,
-      "content_format": "qul_html_v1"
+      "content_format": "qul_html_v1",
+      "structured_asset": "baghawi.structured.json",
+      "structured_format": "tafsir_blocks_v1",
+      "structured_sha256": "e8fabf25d47124a2c67ccf8d1569ee206dcf2ed2a003f88e9b4d49ff12525ff9"
     },
     {
       "id": "mukhtasar_ar",

@@ -171,8 +171,9 @@
   </dialog>
 
   <script>
-    const DATA_URL = "https://github.com/abudiomar/al-quran-data/releases/download/v1.1/ibn_kathir.structured.json";
-    let book;
+    const QUL_API_URL = "https://qul.tarteel.ai/api/v1/tafsirs/14/by_range";
+    let book = {};
+    let localBookLoaded = false;
 
     const status = document.querySelector("#status");
     const statusText = document.querySelector("#statusText");
@@ -215,8 +216,43 @@
       return text("span", span.text || "", classes[span.type] || "");
     }
 
+    function parseRemoteEntry(source, ayahKeys) {
+      const footnotes = [];
+      const html = source.replace(/\[\[([\s\S]*?)\]\]/g, (_, note) => {
+        const id = footnotes.push({ id: footnotes.length + 1, text: note.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() });
+        return `<span data-tafsir-footnote="${id}"></span>`;
+      });
+      const root = new DOMParser().parseFromString(html, "text/html").body;
+      const blocks = [];
+
+      function addSpans(node, spans, kind = "text") {
+        for (const child of node.childNodes) {
+          if (child.nodeType === Node.TEXT_NODE) {
+            if (child.textContent) spans.push({ type: kind, text: child.textContent });
+            continue;
+          }
+          const noteId = child.dataset?.tafsirFootnote;
+          const classes = child.classList || [];
+          if (noteId) spans.push({ type: "footnote_reference", id: Number(noteId) });
+          else if (classes.contains("qpc-hafs")) addSpans(child, spans, "quran");
+          else if (classes.contains("ayah-tag")) addSpans(child, spans, "ayah_reference");
+          else addSpans(child, spans, kind);
+        }
+      }
+
+      for (const element of root.querySelectorAll("p, h3, .sep")) {
+        if (element.classList.contains("sep")) {
+          blocks.push({ type: "separator" });
+          continue;
+        }
+        const spans = [];
+        addSpans(element, spans);
+        blocks.push({ type: element.tagName === "H3" ? "heading" : "paragraph", spans });
+      }
+      return { blocks, footnotes, ayah_keys: ayahKeys };
+    }
+
     function render(key) {
-      if (!book) return;
       let entry = book[key];
       if (typeof entry === "string") entry = book[entry];
       if (!entry) return showError(`لا يوجد تفسير للموضع ${key}`);
@@ -241,42 +277,34 @@
       document.title = `تفسير ابن كثير — ${key}`;
     }
 
-    async function loadRemote() {
+    async function loadAyah(key) {
+      if (book[key]) return render(key);
+      if (localBookLoaded) return render(key);
+
       try {
-        const response = await fetch(DATA_URL);
+        status.hidden = false;
+        reader.hidden = true;
+        progress.hidden = false;
+        progress.removeAttribute("value");
+        statusText.className = "";
+        statusText.textContent = "جارٍ تحميل التفسير…";
+        const query = new URLSearchParams({ from: key, to: key });
+        const response = await fetch(`${QUL_API_URL}?${query}`);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const total = Number(response.headers.get("content-length")) || 0;
-        if (!response.body || !total) {
-          book = await response.json();
-        } else {
-          progress.max = total;
-          progress.value = 0;
-          const reader = response.body.getReader();
-          const chunks = [];
-          let received = 0;
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            chunks.push(value);
-            received += value.length;
-            progress.value = received;
-            statusText.textContent = `جارٍ التحميل… ${Math.round(received / total * 100)}٪`;
-          }
-          const bytes = new Uint8Array(received);
-          let offset = 0;
-          for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
-          statusText.textContent = "جارٍ تحليل الملف…";
-          book = JSON.parse(new TextDecoder().decode(bytes));
-        }
-        render(document.querySelector("#ayahKey").value.trim());
+        const tafsir = (await response.json()).tafsirs?.[0];
+        if (!tafsir) return showError(`لا يوجد تفسير للموضع ${key}`);
+        const ayahKeys = tafsir.verses || [key];
+        const entry = parseRemoteEntry(tafsir.text, ayahKeys);
+        for (const ayahKey of ayahKeys) book[ayahKey] = entry;
+        render(key);
       } catch (error) {
-        showError("تعذر تحميل الملف تلقائياً. استخدم زر «فتح ملف» لاختيار النسخة المحلية.");
+        showError("تعذر تحميل التفسير. تحقق من الاتصال أو استخدم زر «فتح ملف».");
       }
     }
 
     document.querySelector("#lookup").addEventListener("submit", event => {
       event.preventDefault();
-      render(document.querySelector("#ayahKey").value.trim());
+      loadAyah(document.querySelector("#ayahKey").value.trim());
     });
     document.querySelector("#file").addEventListener("change", async event => {
       const file = event.target.files[0];
@@ -287,6 +315,7 @@
       progress.hidden = true;
       try {
         book = JSON.parse(await file.text());
+        localBookLoaded = true;
         render(document.querySelector("#ayahKey").value.trim());
       } catch (_) {
         showError("ملف JSON غير صالح.");
@@ -295,7 +324,7 @@
     document.querySelector("#closeDialog").addEventListener("click", () => dialog.close());
     dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
 
-    loadRemote();
+    loadAyah(document.querySelector("#ayahKey").value.trim());
   </script>
 </body>
 </html>

@@ -1,9 +1,21 @@
+import json
+from pathlib import Path
 import unittest
 
 from tools.tafsir_parser import parse_tafsir_html, structure_book
 
 
 class TafsirParserTest(unittest.TestCase):
+    def test_manifest_publishes_structured_baghawi_asset(self):
+        manifest = json.loads(
+            (Path(__file__).parents[1] / "manifest.json").read_text(encoding="utf-8")
+        )
+        baghawi = next(book for book in manifest["books"] if book["id"] == "baghawi")
+
+        self.assertEqual(baghawi["structured_asset"], "baghawi.structured.json")
+        self.assertEqual(baghawi["structured_format"], "tafsir_blocks_v1")
+        self.assertRegex(baghawi["structured_sha256"], r"^[0-9a-f]{64}$")
+
     def test_parses_ibn_kathir_paragraph_semantics(self):
         source = (
             '<div class="ar" lang="ar"><p>قال تعالى: '
