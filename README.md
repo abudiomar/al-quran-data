@@ -45,3 +45,12 @@ anchor, matching the raw asset.
 The current Al-Saadi source contains 6,177 of 6,236 ayahs. Its 59 absent
 ayahs remain explicitly unavailable; generation never guesses or copies
 neighboring commentary.
+
+Build compact mobile databases without duplicated range text:
+
+```powershell
+python -m tools.build_tafsir_sqlite ./dist/ibn_kathir.structured.json ./dist/ibn_kathir.structured.sqlite --edition-id ibn_kathir
+```
+
+Mobile databases store one document per anchor plus an indexed ayah mapping.
+They intentionally omit archival `source_html`.

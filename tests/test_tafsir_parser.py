@@ -1,11 +1,43 @@
 import json
 from pathlib import Path
+import sqlite3
+import tempfile
 import unittest
 
+from tools.build_tafsir_sqlite import build_database
 from tools.tafsir_parser import parse_tafsir_html, structure_book
 
 
 class TafsirParserTest(unittest.TestCase):
+    def test_builds_anchor_based_mobile_database(self):
+        book = {
+            "2:8": {
+                "source_html": "<p>archival only</p>",
+                "plain_text": "تفسير",
+                "blocks": [{"type": "paragraph", "spans": [
+                    {"type": "text", "text": "تفسير"}
+                ]}],
+                "footnotes": [],
+                "ayah_keys": ["2:8", "2:9"],
+            },
+            "2:9": "2:8",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "tafsir.sqlite"
+            build_database(book, path, edition_id="test")
+            database = sqlite3.connect(path)
+            documents = database.execute(
+                "SELECT anchor_key, blocks_json FROM tafsir_documents"
+            ).fetchall()
+            mappings = database.execute(
+                "SELECT ayah_key, anchor_key FROM tafsir_ayah_map ORDER BY ayah_key"
+            ).fetchall()
+            database.close()
+
+        self.assertEqual(len(documents), 1)
+        self.assertNotIn("source_html", documents[0][1])
+        self.assertEqual(mappings, [("2:8", "2:8"), ("2:9", "2:8")])
+
     def test_manifest_publishes_structured_long_tafsir_assets(self):
         manifest = json.loads(
             (Path(__file__).parents[1] / "manifest.json").read_text(encoding="utf-8")
@@ -28,6 +60,13 @@ class TafsirParserTest(unittest.TestCase):
                 )
                 self.assertEqual(book["structured_format"], "tafsir_blocks_v1")
                 self.assertRegex(book["structured_sha256"], r"^[0-9a-f]{64}$")
+                self.assertEqual(
+                    book["structured_sqlite_asset"],
+                    f"{book_id}.structured.sqlite.gz",
+                )
+                self.assertRegex(
+                    book["structured_sqlite_sha256"], r"^[0-9a-f]{64}$"
+                )
 
         self.assertEqual(books["saadi"]["ayah_count"], 6177)
         self.assertEqual(books["saadi"]["coverage_status"], "source_incomplete")

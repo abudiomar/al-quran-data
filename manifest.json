@@ -15,7 +15,9 @@
       "ayah_count": 6236,
       "structured_asset": "muyassar.structured.json",
       "structured_format": "tafsir_blocks_v1",
-      "structured_sha256": "fd13f810f3d5562e0ebcb07a37d1897c7e1505e6bc8e978bb0b049656632bd9e"
+      "structured_sha256": "fd13f810f3d5562e0ebcb07a37d1897c7e1505e6bc8e978bb0b049656632bd9e",
+      "structured_sqlite_asset": "muyassar.structured.sqlite.gz",
+      "structured_sqlite_sha256": "c50e4bb64196751e2fe53ad13d2d781b47fe5e83b171ae1b1440b16a1d1c6743"
     },
     {
       "id": "saadi",
@@ -31,7 +33,9 @@
       "missing_ayah_count": 59,
       "structured_asset": "saadi.structured.json",
       "structured_format": "tafsir_blocks_v1",
-      "structured_sha256": "de582e811e83d48f2331011e819e18ce51a26dffea2c4db95f48a3179454b710"
+      "structured_sha256": "de582e811e83d48f2331011e819e18ce51a26dffea2c4db95f48a3179454b710",
+      "structured_sqlite_asset": "saadi.structured.sqlite.gz",
+      "structured_sqlite_sha256": "95b1f890411c248c73b42ca5aa368dd876f77be4d5b3d5bc680ba2abeee3250e"
     },
     {
       "id": "ibn_kathir",
@@ -46,7 +50,9 @@
       "content_format": "qul_html_v1",
       "structured_asset": "ibn_kathir.structured.json",
       "structured_format": "tafsir_blocks_v1",
-      "structured_sha256": "fadf172fb4bbd004dcebcd8bee272b272c4cd4cfd17954d353ffd0510a597c5b"
+      "structured_sha256": "fadf172fb4bbd004dcebcd8bee272b272c4cd4cfd17954d353ffd0510a597c5b",
+      "structured_sqlite_asset": "ibn_kathir.structured.sqlite.gz",
+      "structured_sqlite_sha256": "688c423aaffae5be850a84ef7e6c6dbbe8dd92c6699094f2ad38c1105af5e74b"
     },
     {
       "id": "tabari",
@@ -61,7 +67,9 @@
       "content_format": "qul_html_v1",
       "structured_asset": "tabari.structured.json",
       "structured_format": "tafsir_blocks_v1",
-      "structured_sha256": "8f37bbc51c44d5093eacadacbfc422a812465de4524c137820f172d70d94fdbb"
+      "structured_sha256": "8f37bbc51c44d5093eacadacbfc422a812465de4524c137820f172d70d94fdbb",
+      "structured_sqlite_asset": "tabari.structured.sqlite.gz",
+      "structured_sqlite_sha256": "c4b5099bfb9a3eebca45376508f2e65793a8547a337ba0d57937f24064fc2eb5"
     },
     {
       "id": "baghawi",
@@ -76,7 +84,9 @@
       "content_format": "qul_html_v1",
       "structured_asset": "baghawi.structured.json",
       "structured_format": "tafsir_blocks_v1",
-      "structured_sha256": "e8fabf25d47124a2c67ccf8d1569ee206dcf2ed2a003f88e9b4d49ff12525ff9"
+      "structured_sha256": "e8fabf25d47124a2c67ccf8d1569ee206dcf2ed2a003f88e9b4d49ff12525ff9",
+      "structured_sqlite_asset": "baghawi.structured.sqlite.gz",
+      "structured_sqlite_sha256": "28cb10419fb119814779ec2fe2a7bbe2006c1f14244aa525bedbc317920e0e4a"
     },
     {
       "id": "mukhtasar_ar",
@@ -90,7 +100,9 @@
       "ayah_count": 6236,
       "structured_asset": "mukhtasar_ar.structured.json",
       "structured_format": "tafsir_blocks_v1",
-      "structured_sha256": "9260d744805d57ae05bc35a6c75c4b0a48f01bb55563f0c2f683e1afc92fe588"
+      "structured_sha256": "9260d744805d57ae05bc35a6c75c4b0a48f01bb55563f0c2f683e1afc92fe588",
+      "structured_sqlite_asset": "mukhtasar_ar.structured.sqlite.gz",
+      "structured_sqlite_sha256": "b8f308d964335da4a4e3cdd98985ba5dcb98492a8297df15f112f161f191fbde"
     },
     {
       "id": "mukhtasar_en",
@@ -104,7 +116,9 @@
       "ayah_count": 6236,
       "structured_asset": "mukhtasar_en.structured.json",
       "structured_format": "tafsir_blocks_v1",
-      "structured_sha256": "54d3b52f803700b1ef51cf865f03179bbc6ae3c571f9bc9e86ea9070c5dad084"
+      "structured_sha256": "54d3b52f803700b1ef51cf865f03179bbc6ae3c571f9bc9e86ea9070c5dad084",
+      "structured_sqlite_asset": "mukhtasar_en.structured.sqlite.gz",
+      "structured_sqlite_sha256": "2cc06883c3a587acfe21609d32ddaefe767ba833645662c92b68847b14525f3a"
     },
     {
       "id": "saheeh_intl",
